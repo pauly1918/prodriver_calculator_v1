@@ -330,7 +330,15 @@ button:hover {
     grid-column: 2;
   }
 
+  .btn-reset {
+  background: #37474f;
+  margin-top: 10px;
 }
+
+.btn-reset:hover {
+  background: #263238;
+}
+  
     
 
 
@@ -354,29 +362,34 @@ button:hover {
       <div class="card">
         <div class="inputs">
 
-          <label>Distance (km)</label>
-          <input type="number" id="distance">
+  <label>Distance (km)</label>
+  <input type="number" id="distance">
 
-          <label>Prix in-game (€)</label>
-          <input type="number" id="prix">
+  <label>Prix in-game (€)</label>
+  <input type="number" id="prix">
 
-          <label>Temps in-game (hh:mm)</label>
-          <input type="text" id="temps" placeholder="65:58">
+  <label>Temps in-game (hh:mm)</label>
+  <input type="text" id="temps" placeholder="65:58">
 
-          <label>
-            <input type="checkbox" id="alimentaire">
-            Marchandise alimentaire
-          </label>
+  <label>
+    <input type="checkbox" id="alimentaire">
+    Marchandise alimentaire
+  </label>
 
-          <label>ProStock (%)</label>
-          <input type="number" id="prostock" placeholder="-23">
+  <label>ProStock (%)</label>
+  <input type="number" id="prostock" placeholder="-23">
 
-          <label>Éco-malus camion (%)</label>
-          <input type="number" id="eco" value="1">
+  <label>Éco-malus camion (%)</label>
+  <input type="number" id="eco" value="1">
 
-          <button onclick="calculer()">Calculer</button>
+  <button onclick="calculer()">Calculer</button>
+          
+  <button type="button" onclick="resetForm()" class="btn-reset">
+    Reset
+  </button>
 
-        </div>
+</div>
+
       </div>
 
       <div class="card" id="results"></div>
@@ -510,6 +523,7 @@ document.getElementById("results").innerHTML = `
 
 </body>
 </html>
+
 
 
 
