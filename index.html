@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculateur ProDriver</title>
+  <style>
+  body {
+  font-family: Arial, sans-serif;
+  background: #0f1115;
+  padding: 20px;
+  color: #e0e0e0;
+}
+
+.container {
+  max-width: 520px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  color: #ffffff;
+}
+
+/* Cartes */
+.card,
+.results {
+  background: #1c1f26;
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Labels */
+label {
+  font-weight: bold;
+  margin-top: 10px;
+  color: #cfd8dc;
+  width: 100%;
+}
+
+/* Champs */
+input {
+  width: 100%;
+  max-width: 420px;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: none;
+  background: #2a2f3a;
+  color: #ffffff;
+}
+
+input::placeholder {
+  color: #9ea7b3;
+}
+
+/* Bouton */
+button {
+  width: 100%;
+  max-width: 420px;
+  padding: 12px;
+  margin-top: 18px;
+  font-size: 16px;
+  background: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1565c0;
+}
+
+/* Lignes simples */
+.row {
+  text-align: center;
+  margin-bottom: 6px;
+  color: #e0e0e0;
+}
+
+/* Mise en avant arrivée */
+.arrival-time {
+  margin-top: 12px;
+  padding: 12px;
+  width: 100%;
+  text-align: center;
+  background: #102027;
+  border-left: 4px solid #42a5f5;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* Valeurs importantes */
+.result-main {
+  font-size: 20px;
+  font-weight: bold;
+  color: #4caf50;
+}
+
+.result-secondary {
+  color: #b0bec5;
+  font-size: 14px;
+}
+.inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Labels alignés */
+.inputs label {
+  width: 100%;
+  max-width: 420px;
+  text-align: left;
+}
+
+/* Champs alignés */
+.inputs input {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Checkbox propre */
+.inputs label input[type="checkbox"] {
+  width: auto;
+  margin-right: 6px;
+}
+
+/* Bouton centré et aligné */
+.inputs button {
+  width: 100%;
+  max-width: 420px;
+}
+.job-status {
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.job-status.good {
+  background: #1b5e20;
+  color: #a5d6a7;
+}
+
+.job-status.medium {
+  background: #f9a825;
+  color: #000000;
+}
+
+.job-status.bad {
+  background: #b71c1c;
+  color: #ffcdd2;
+}
+.kpi {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 15px 0;
+  width: 100%;
+}
+
+.kpi-box {
+  background: #2a2f3a;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.kpi-title {
+  font-size: 12px;
+  color: #b0bec5;
+}
+
+.kpi-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+}
+.kpi-main {
+  background: #263238;
+  border: 2px solid #4caf50;
+}
+
+.kpi-main .kpi-value {
+  font-size: 28px;
+  font-weight: bold;
+  color: #4caf50;
+}
+
+.kpi-main .kpi-title {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.arrival-main {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.arrival-sub {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #b0bec5;
+}
+
+
+
+
+
+
+  </style>
+</head>
+<body>
+
+<h1>Calculateur ProDriver</h1>
+
+<div class="card">
+  <div class="inputs">
+
+    <label>Distance (km)</label>
+    <input type="number" id="distance">
+
+    <label>Prix in-game (€)</label>
+    <input type="number" id="prix">
+
+    <label>Temps in-game (hh:mm)</label>
+    <input type="text" id="temps" placeholder="65:58">
+
+    <label>
+      <input type="checkbox" id="alimentaire">
+      Marchandise alimentaire
+    </label>
+
+    <label>ProStock (%)</label>
+    <input type="number" id="prostock" placeholder="-23">
+
+    <label>Éco-malus camion (%)</label>
+    <input type="number" id="eco" value="1">
+
+    <button onclick="calculer()">Calculer</button>
+
+  </div>
+</div>
+
+<div class="card" id="results"></div>
+<div style="text-align:center; opacity:0.4; font-size:12px;">
+  ProDriver Calculator — v1.0
+</div>
+
+
+
+
+
+<script>
+const PART_CHAUFFEUR = 0.11;
+const BONUS_ALIMENTAIRE = 0.15;
+
+function calculer() {
+  const distance = parseFloat(document.getElementById("distance").value);
+  const prix = parseFloat(document.getElementById("prix").value);
+  const temps = document.getElementById("temps").value;
+  const prostockPct = parseFloat(document.getElementById("prostock").value);
+  const alimentaire = document.getElementById("alimentaire").checked;
+  const ecoPct = parseFloat(document.getElementById("eco").value);
+
+  const brut = prix / 25;
+
+  const prostockEur = brut * (prostockPct / 100);
+  const bonusAlimEur = alimentaire ? brut * BONUS_ALIMENTAIRE : 0;
+  const ecoEur = brut * (ecoPct / 100);
+
+  const net = brut + prostockEur + bonusAlimEur - ecoEur;
+  const chauffeur = net * PART_CHAUFFEUR;
+  const partVTC = net - chauffeur;
+const euroParKm = partVTC / distance;
+
+let jobText = "";
+let jobClass = "";
+
+if (euroParKm >= 1.4) {
+  jobText = "🟢 BON";
+  jobClass = "good";
+} else if (euroParKm >= 1.2) {
+  jobText = "🟡 MOYEN";
+  jobClass = "medium";
+} else {
+  jobText = "🔴 MAUVAIS";
+  jobClass = "bad";
+}
+
+
+  let tempsReel = "—";
+  let eurParHeure = "—";
+let heureArrivee = "—";
+
+  if (/^\d{1,3}:\d{2}$/.test(temps)) {
+  const [h, m] = temps.split(":").map(Number);
+  const minutesIG = h * 60 + m;
+  const minutesReel = minutesIG * 3.15 / 60;
+
+  const heures = Math.floor(minutesReel / 60);
+  const minutes = Math.round(minutesReel % 60);
+
+  tempsReelLisible = `${heures} h ${minutes} min`;
+
+  const now = new Date();
+  const arrival = new Date(now.getTime() + minutesReel * 60000);
+
+  heureArrivee =
+    arrival.getHours().toString().padStart(2, "0") + ":" +
+    arrival.getMinutes().toString().padStart(2, "0");
+}
+
+  document.getElementById("results").innerHTML = `
+  <div class="job-status ${jobClass}">
+    ${jobText}
+  </div>
+
+  <div class="kpi">
+    <div class="kpi-box kpi-main">
+  <div class="kpi-title">Part VTC</div>
+  <div class="kpi-value">${partVTC.toFixed(2)} €</div>
+</div>
+
+
+    <div class="kpi-box">
+      <div class="kpi-title">€/km</div>
+     <div class="kpi-value">
+  ${distance > 0 ? (partVTC / distance).toFixed(2) : "—"}
+</div>
+
+ <div class="arrival-time">
+  <div class="arrival-main">
+    🕒 Arrivée prévue à <b>${heureArrivee}</b>
+  </div>
+  <div class="arrival-sub">
+    ⏱️ Durée réelle : ${tempsReelLisible}
+  </div>
+</div>
+
+
+  <details>
+    <summary>Détails du calcul</summary>
+    <div class="row">Brut : ${brut.toFixed(2)} €</div>
+    <div class="row">ProStock : ${prostockEur.toFixed(2)} €</div>
+    <div class="row">Bonus alimentaire : ${bonusAlimEur.toFixed(2)} €</div>
+    <div class="row">Éco-malus : -${ecoEur.toFixed(2)} €</div>
+    <div class="row">Chauffeur : ${chauffeur.toFixed(2)} €</div>
+  </details>
+`;
+}
+
+
+</script>
+
+</body>
+</html>
