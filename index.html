@@ -187,9 +187,16 @@ button:hover {
   font-weight: bold;
   color: #ffffff;
 }
-.kpi-main {
-  background: #263238;
+.kpi-main.good {
   border: 2px solid #4caf50;
+}
+
+.kpi-main.ok {
+  border: 2px solid #f9a825;
+}
+
+.kpi-main.bad {
+  border: 2px solid #e53935;
 }
 
 .kpi-main .kpi-value {
@@ -231,18 +238,6 @@ button:hover {
   font-weight: bold;
   margin-bottom: 6px;
 }
-
-.good {
-  color: #2e7d32; /* vert */
-}
-
-.ok {
-  color: #f9a825; /* jaune */
-}
-
-.bad {
-  color: #c62828; /* rouge */
-}
     
 .kpi-value.good {
   color: #4caf50;
@@ -255,6 +250,17 @@ button:hover {
 .kpi-value.bad {
   color: #e53935;
 }
+.kpi-main .kpi-value.good {
+  color: #4caf50;
+}
+
+.kpi-main .kpi-value.ok {
+  color: #f9a825;
+}
+
+.kpi-main .kpi-value.bad {
+  color: #e53935;
+}    
 
 
 
@@ -385,7 +391,7 @@ let heureArrivee = "—";
   </div>
 
   <div class="kpi">
-    <div class="kpi-box kpi-main">
+    <div class="kpi-box kpi-main ${jobClass}">
   <div class="kpi-title">Part VTC</div>
   <div class="kpi-value ${jobClass}">
   ${partVTC.toFixed(2)} € — ${jobText}
@@ -425,6 +431,7 @@ let heureArrivee = "—";
 
 </body>
 </html>
+
 
 
 
