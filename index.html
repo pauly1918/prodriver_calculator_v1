@@ -261,6 +261,78 @@ button:hover {
 .kpi-main .kpi-value.bad {
   color: #e53935;
 }    
+@media (max-width: 600px) {
+
+  /* KPI passent en vertical */
+  .kpi {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* La carte Part VTC prend toute la largeur */
+  .kpi-box {
+    width: 100%;
+  }
+
+  /* Part VTC encore plus mise en avant */
+  .kpi-main .kpi-value {
+    font-size: 32px;
+  }
+
+  /* Arrivée plus compacte */
+  .arrival-time {
+    font-size: 18px;
+    padding: 10px;
+  }
+
+}
+    /* Centrage des résultats sur desktop */
+@media (min-width: 601px) {
+
+  #results {
+    align-items: center;
+  }
+
+  .kpi {
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .job-status {
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .arrival-time {
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  details {
+    max-width: 480px;
+    width: 100%;
+  }
+
+}
+/* Dashboard central desktop */
+@media (min-width: 601px) {
+
+  .dashboard {
+    display: grid;
+    grid-template-columns: 1fr minmax(480px, 560px) 1fr;
+    width: 100%;
+  }
+
+  .dashboard-center {
+    grid-column: 2;
+  }
+
+}
+    
+
 
 
 
@@ -271,44 +343,53 @@ button:hover {
 </head>
 <body>
 
- 
   <div class="logo-container">
-  <img src="logo-stq.png" alt="STQ Logistique" class="logo">
-</div>
-
-<div class="card">
-  <div class="inputs">
-
-    <label>Distance (km)</label>
-    <input type="number" id="distance">
-
-    <label>Prix in-game (€)</label>
-    <input type="number" id="prix">
-
-    <label>Temps in-game (hh:mm)</label>
-    <input type="text" id="temps" placeholder="65:58">
-
-    <label>
-      <input type="checkbox" id="alimentaire">
-      Marchandise alimentaire
-    </label>
-
-    <label>ProStock (%)</label>
-    <input type="number" id="prostock" placeholder="-23">
-
-    <label>Éco-malus camion (%)</label>
-    <input type="number" id="eco" value="1">
-
-    <button onclick="calculer()">Calculer</button>
-
+    <img src="logo-stq.png" alt="STQ Logistique" class="logo">
   </div>
-</div>
 
-<div class="card" id="results"></div>
-<div style="text-align:center; opacity:0.4; font-size:12px;">
-  ProDriver Calculator — v1.0
-</div>
+  <div class="dashboard">
 
+    <div class="dashboard-center">
+
+      <div class="card">
+        <div class="inputs">
+
+          <label>Distance (km)</label>
+          <input type="number" id="distance">
+
+          <label>Prix in-game (€)</label>
+          <input type="number" id="prix">
+
+          <label>Temps in-game (hh:mm)</label>
+          <input type="text" id="temps" placeholder="65:58">
+
+          <label>
+            <input type="checkbox" id="alimentaire">
+            Marchandise alimentaire
+          </label>
+
+          <label>ProStock (%)</label>
+          <input type="number" id="prostock" placeholder="-23">
+
+          <label>Éco-malus camion (%)</label>
+          <input type="number" id="eco" value="1">
+
+          <button onclick="calculer()">Calculer</button>
+
+        </div>
+      </div>
+
+      <div class="card" id="results"></div>
+
+    </div> <!-- dashboard-center -->
+
+  </div> <!-- dashboard -->
+
+  <div style="text-align:center; opacity:0.4; font-size:12px;">
+    ProDriver Calculator — v1.0
+  </div>
+
+</body>
 
 
 
@@ -422,6 +503,7 @@ if (eurParKm >= 1.4) {
 
 </body>
 </html>
+
 
 
 
