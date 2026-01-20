@@ -457,45 +457,52 @@ if (eurParKm >= 1.4) {
     arrival.getMinutes().toString().padStart(2, "0");
 }
 
-  document.getElementById("results").innerHTML = `
-  <div class="job-status ${jobClass}">
-    ${jobText}
-  </div>
+document.getElementById("results").innerHTML = `
+  <div class="results-inner">
 
-  <div class="kpi">
-    <div class="kpi-box kpi-main ${jobClass}">
-  <div class="kpi-title">Part VTC</div>
-  <div class="kpi-value ${jobClass}">
-  ${partVTC.toFixed(2)} € — ${jobText}
-</div>
+    <div class="job-status ${jobClass}">
+      ${jobText}
+    </div>
 
+    <div class="kpi">
 
+      <div class="kpi-box kpi-main ${jobClass}">
+        <div class="kpi-title">Part VTC</div>
+        <div class="kpi-value ${jobClass}">
+          ${partVTC.toFixed(2)} € — ${jobText}
+        </div>
+      </div>
 
-    <div class="kpi-box">
-      <div class="kpi-title">€/km</div>
-     <div class="kpi-value">
-  ${distance > 0 ? (partVTC / distance).toFixed(2) : "—"}
-</div>
+      <div class="kpi-box">
+        <div class="kpi-title">€/km</div>
+        <div class="kpi-value">
+          ${distance > 0 ? (partVTC / distance).toFixed(2) : "—"}
+        </div>
+      </div>
 
- <div class="arrival-time">
-  <div class="arrival-main">
-    🕒 Arrivée prévue à <b>${heureArrivee}</b>
-  </div>
-  <div class="arrival-sub">
-    ⏱️ Durée réelle : ${tempsReelLisible}
-  </div>
-</div>
+    </div>
 
+    <div class="arrival-time">
+      <div class="arrival-main">
+        🕒 Arrivée prévue à <b>${heureArrivee}</b>
+      </div>
+      <div class="arrival-sub">
+        ⏱️ Durée réelle : ${tempsReelLisible}
+      </div>
+    </div>
 
-  <details>
-    <summary>Détails du calcul</summary>
-    <div class="row">Brut : ${brut.toFixed(2)} €</div>
-    <div class="row">ProStock : ${prostockEur.toFixed(2)} €</div>
-    <div class="row">Bonus alimentaire : ${bonusAlimEur.toFixed(2)} €</div>
-    <div class="row">Éco-malus : -${ecoEur.toFixed(2)} €</div>
-    <div class="row">Chauffeur : ${chauffeur.toFixed(2)} €</div>
-  </details>
+    <details>
+      <summary>Détails du calcul</summary>
+      <div class="row">Brut : ${brut.toFixed(2)} €</div>
+      <div class="row">ProStock : ${prostockEur.toFixed(2)} €</div>
+      <div class="row">Bonus alimentaire : ${bonusAlimEur.toFixed(2)} €</div>
+      <div class="row">Éco-malus : -${ecoEur.toFixed(2)} €</div>
+      <div class="row">Chauffeur : ${chauffeur.toFixed(2)} €</div>
+    </details>
+
+  </div> <!-- results-inner -->
 `;
+
 }
 
 
@@ -503,6 +510,7 @@ if (eurParKm >= 1.4) {
 
 </body>
 </html>
+
 
 
 
