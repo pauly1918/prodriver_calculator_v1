@@ -331,13 +331,40 @@ button:hover {
   }
 
   .btn-reset {
-  background: #37474f;
-  margin-top: 10px;
+    background: #37474f;
+    margin-top: 10px;
+  }
+
+  .btn-reset:hover {
+    background: #263238;
+  }
 }
 
-.btn-reset:hover {
-  background: #263238;
+/* Ajustements mobile */
+@media (max-width: 600px) {
+
+  .inputs {
+    gap: 6px;
+  }
+
+  .inputs button {
+    margin-top: 14px;
+  }
+
+  .card {
+    padding: 14px;
+  }
+
+  .job-status {
+    margin-bottom: 10px;
+  }
+
+  .arrival-time {
+    margin-top: 10px;
+    font-size: 16px;
+  }
 }
+
   
     
 
@@ -517,12 +544,24 @@ document.getElementById("results").innerHTML = `
 `;
 
 }
+function resetForm() {
+  document.getElementById("distance").value = "";
+  document.getElementById("prix").value = "";
+  document.getElementById("temps").value = "";
+  document.getElementById("prostock").value = "";
+  document.getElementById("eco").value = 1;
+
+  document.getElementById("alimentaire").checked = false;
+
+  document.getElementById("results").innerHTML = "";
+}
 
 
 </script>
 
 </body>
 </html>
+
 
 
 
